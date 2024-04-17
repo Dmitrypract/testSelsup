@@ -51,15 +51,10 @@ public class CrptApi {
         try {
             HttpRequest request = buildRequest(document, signature);
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            // Это пример обработки ответа от сервера, его можно изменить в зависимости от api.
-            // Проверяем статус ответа
             if (response.statusCode() == 200) {
-                // Обрабатываем тело ответа при успешном статусе
+
                 String responseBody = response.body();
-                // Здесь вы можете добавить код для обработки тела ответа
-                processResponseBody(responseBody);
             } else {
-                // Обрабатываем ошибку при неуспешном статусе
                 System.out.println("Ошибка: " + response.statusCode());
             }
         }catch (IOException e) {
@@ -72,9 +67,7 @@ public class CrptApi {
      *
      * @param responseBody тело ответа для обработки.
      */
-    private void processResponseBody(String responseBody) {
-        // Здесь вы можете добавить код для обработки тела ответа
-    }
+
 
     /**
      * Метод для остановки планировщика.
@@ -100,20 +93,13 @@ public class CrptApi {
         return request;
     }
 
-    /**
-     * Метод для преобразования документа в JSON.
-     *
-     * @param document документ для преобразования.
-     * @return JSON-строка.
-     */
+
     private String convertToJson(Document document) {
         Gson gson = new Gson();
         return gson.toJson(document);
     }
 
-    /**
-     * Внутренний класс для представления документа.
-     */
+
     static class Document {
         private Description description;
         private String doc_id;
@@ -234,9 +220,7 @@ public class CrptApi {
         }
     }
 
-    /**
-     * Внутренний класс для представления описания.
-     */
+
     public class Description {
         private String participantInn;
 
@@ -249,9 +233,7 @@ public class CrptApi {
         }
     }
 
-    /**
-     * Внутренний класс для представления продукта.
-     */
+
     public class Product {
         private String certificate_document;
         private String certificate_document_date;

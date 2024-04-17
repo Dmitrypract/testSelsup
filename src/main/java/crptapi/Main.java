@@ -10,10 +10,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        // Создаем экземпляр CrptApi
+
         CrptApi api = new CrptApi(TimeUnit.SECONDS, 1, "https://ismp.crpt.ru/api/v3/lk/documents/create");
 
-        // Читаем JSON из файла
         String json = "";
         try {
             byte[] bytes = Files.readAllBytes(Paths.get("src/main/resources/document.json"));
@@ -22,17 +21,13 @@ public class Main {
             e.printStackTrace();
         }
 
-        // Преобразуем JSON в объект Document
         Gson gson = new Gson();
         CrptApi.Document document = gson.fromJson(json, CrptApi.Document.class);
 
-        // Создаем подпись
         String signature = "signature";
 
-        // Вызываем createDocument()
         api.createDocument(document, signature);
 
-        // Завершаем работу с api
         api.shutdown();
     }
 }
